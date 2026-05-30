@@ -4,66 +4,287 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Chickn — bora virar galo 🐔</title>
-<meta name="description" content="Chickn: registre seus treinos de academia em segundos. App Android.">
+<meta name="description" content="Registre seus treinos de academia em segundos. IA que identifica o aparelho, frases na sua medida e a foto do 'tá pago'. App Android.">
+<meta name="theme-color" content="#0E0E10">
+<!-- Open Graph -->
+<meta property="og:title" content="Chickn — bora virar galo">
+<meta property="og:description" content="Registre seus treinos em segundos. IA, frases na sua medida e a foto do 'tá pago'.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://marvinabr.github.io/chickn-site/icon.png">
+<link rel="icon" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root { color-scheme: dark; }
-  * { box-sizing: border-box; }
-  body {
-    font-family: -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-    margin: 0; min-height: 100vh; background: #0e0e10; color: #e8e8e8;
-    display: flex; flex-direction: column; align-items: center;
-    justify-content: center; text-align: center; padding: 40px 20px;
+  :root{
+    --bg:#0E0E10; --surface:#18181B; --surface2:#26262B;
+    --neon:#C6FF00; --neon-dim:#9BCC00; --magenta:#FF2D78;
+    --text:#F5F5F7; --muted:#9A9AA2;
+    --display:"Space Grotesk",system-ui,sans-serif;
+    --body:"Inter",system-ui,sans-serif;
   }
-  .logo { font-size: 76px; line-height: 1; }
-  h1 {
-    font-size: 2.6rem; font-weight: 900; letter-spacing: -1.5px;
-    margin: 16px 0 4px; color: #7cf03d;
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--body); background:var(--bg); color:var(--text);
+    line-height:1.6; overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
   }
-  .tag { color: #9a9a9a; font-size: 1.1rem; margin: 0 0 36px; }
-  .btn {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: #7cf03d; color: #0e0e10; font-weight: 800; font-size: 1.15rem;
-    text-decoration: none; padding: 16px 34px; border-radius: 14px;
-    transition: transform .12s ease, box-shadow .12s ease;
-    box-shadow: 0 6px 24px rgba(124,240,61,0.25);
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+  /* ---------- nav ---------- */
+  nav{
+    position:sticky;top:0;z-index:50;
+    backdrop-filter:blur(14px); background:rgba(14,14,16,.72);
+    border-bottom:1px solid rgba(255,255,255,.06);
   }
-  .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(124,240,61,0.35); }
-  .meta { color: #7a7a7a; font-size: 0.92rem; margin-top: 16px; }
-  .badge {
-    display: inline-block; background: rgba(255,255,255,0.08); color: #cfcfcf;
-    font-size: 0.78rem; padding: 4px 12px; border-radius: 999px; margin-bottom: 28px;
-    letter-spacing: 0.5px;
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;font-size:1.2rem}
+  .brand img{width:32px;height:32px;border-radius:8px}
+  .brand span{color:var(--neon)}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;font-family:var(--display);
+    font-weight:700;cursor:pointer;border:none;border-radius:13px;
+    transition:transform .14s ease, box-shadow .14s ease, background .14s ease;
   }
-  .links { margin-top: 44px; font-size: 0.9rem; }
-  .links a { color: #7cf03d; text-decoration: none; margin: 0 10px; }
-  .links a:hover { text-decoration: underline; }
-  .warn {
-    max-width: 440px; margin: 28px auto 0; color: #8a8a8a; font-size: 0.85rem;
-    line-height: 1.5;
+  .btn-primary{
+    background:var(--neon); color:#0E0E10; padding:13px 24px; font-size:1rem;
+    box-shadow:0 8px 26px rgba(198,255,0,.28);
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(198,255,0,.42)}
+  .btn-sm{padding:9px 18px;font-size:.92rem}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;padding:84px 0 72px;overflow:hidden}
+  .glow{position:absolute;inset:0;z-index:0;pointer-events:none}
+  .glow::before{
+    content:"";position:absolute;top:-160px;left:50%;transform:translateX(-50%);
+    width:760px;height:760px;border-radius:50%;
+    background:radial-gradient(circle,rgba(198,255,0,.18),transparent 62%);
+    filter:blur(20px);
+  }
+  .glow::after{
+    content:"";position:absolute;bottom:-220px;right:-120px;
+    width:520px;height:520px;border-radius:50%;
+    background:radial-gradient(circle,rgba(255,45,120,.14),transparent 62%);
+    filter:blur(20px);
+  }
+  .grid-bg{
+    position:absolute;inset:0;z-index:0;opacity:.4;pointer-events:none;
+    background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+    background-size:46px 46px;
+    -webkit-mask-image:radial-gradient(circle at 50% 30%,#000 30%,transparent 78%);
+            mask-image:radial-gradient(circle at 50% 30%,#000 30%,transparent 78%);
+  }
+  .hero-in{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+  .pill{
+    display:inline-flex;align-items:center;gap:8px;font-size:.8rem;font-weight:600;
+    color:var(--neon);background:rgba(198,255,0,.1);border:1px solid rgba(198,255,0,.24);
+    padding:6px 14px;border-radius:999px;letter-spacing:.4px;margin-bottom:22px;
+  }
+  h1{
+    font-family:var(--display);font-weight:700;font-size:clamp(2.6rem,6vw,4rem);
+    line-height:1.02;letter-spacing:-2px;margin-bottom:18px;
+  }
+  h1 .hl{color:var(--neon)}
+  .sub{font-size:1.18rem;color:var(--muted);max-width:30ch;margin-bottom:32px}
+  .cta-row{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+  .cta-meta{font-size:.86rem;color:var(--muted)}
+  .cta-meta b{color:var(--text)}
+
+  /* ---------- phone mockup ---------- */
+  .phone-wrap{display:flex;justify-content:center}
+  .phone{
+    width:278px;height:580px;border-radius:42px;background:#000;
+    border:10px solid #1c1c20;position:relative;
+    box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.04),
+      0 0 70px rgba(198,255,0,.10);
+    overflow:hidden;
+  }
+  .notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:24px;background:#1c1c20;border-radius:0 0 16px 16px;z-index:3}
+  .screen{position:absolute;inset:0;background:var(--bg);padding:30px 18px 18px;display:flex;flex-direction:column;gap:14px}
+  .s-head{display:flex;align-items:center;gap:8px}
+  .s-head img{width:26px;height:26px;border-radius:7px}
+  .s-head .nm{font-family:var(--display);font-weight:700;color:var(--neon);font-size:1.05rem}
+  .s-head .gear{margin-left:auto;color:var(--muted);font-size:1.1rem}
+  .s-greet{font-family:var(--display);font-weight:700;font-size:1.15rem;margin-top:2px}
+  .s-tag{color:var(--muted);font-size:.74rem;margin-top:-6px}
+  .s-card{
+    background:var(--surface);border-radius:14px;padding:12px 14px;
+    display:flex;align-items:center;justify-content:space-between;
+    border:1px solid rgba(255,255,255,.05);
+  }
+  .s-card .day{font-weight:600;font-size:.82rem}
+  .s-card .st{font-size:.68rem;margin-top:1px}
+  .s-card .st.on{color:var(--neon)} .s-card .st.done{color:var(--muted)}
+  .s-card .kg{color:var(--neon);font-family:var(--display);font-weight:700;font-size:.8rem}
+  .s-fab{
+    margin-top:auto;align-self:center;background:var(--neon);color:#0E0E10;
+    font-family:var(--display);font-weight:700;font-size:.86rem;
+    padding:12px 30px;border-radius:999px;display:flex;align-items:center;gap:7px;
+    box-shadow:0 8px 22px rgba(198,255,0,.3);
+  }
+
+  /* ---------- features ---------- */
+  section.block{padding:72px 0}
+  .eyebrow{font-family:var(--display);font-weight:700;color:var(--neon);font-size:.82rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+  h2{font-family:var(--display);font-weight:700;font-size:clamp(1.8rem,4vw,2.5rem);letter-spacing:-1px;margin-bottom:10px}
+  .lead{color:var(--muted);font-size:1.05rem;max-width:54ch;margin-bottom:44px}
+  .feat{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .card{
+    background:linear-gradient(160deg,var(--surface),rgba(24,24,27,.4));
+    border:1px solid rgba(255,255,255,.06);border-radius:20px;padding:26px;
+    transition:transform .16s ease,border-color .16s ease;
+  }
+  .card:hover{transform:translateY(-4px);border-color:rgba(198,255,0,.3)}
+  .card .ico{
+    width:48px;height:48px;border-radius:13px;display:grid;place-items:center;
+    font-size:1.5rem;background:rgba(198,255,0,.12);margin-bottom:16px;
+  }
+  .card h3{font-family:var(--display);font-weight:700;font-size:1.18rem;margin-bottom:6px}
+  .card p{color:var(--muted);font-size:.96rem}
+
+  /* ---------- steps ---------- */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;counter-reset:s}
+  .step{background:var(--surface);border:1px solid rgba(255,255,255,.06);border-radius:18px;padding:24px;position:relative}
+  .step::before{
+    counter-increment:s;content:counter(s);
+    font-family:var(--display);font-weight:700;font-size:1.1rem;
+    width:34px;height:34px;border-radius:10px;background:var(--neon);color:#0E0E10;
+    display:grid;place-items:center;margin-bottom:14px;
+  }
+  .step h4{font-family:var(--display);font-weight:700;font-size:1.02rem;margin-bottom:4px}
+  .step p{color:var(--muted);font-size:.9rem}
+
+  /* ---------- final cta ---------- */
+  .final{
+    position:relative;text-align:center;margin:24px 0 80px;
+    background:linear-gradient(150deg,rgba(198,255,0,.1),rgba(255,45,120,.08));
+    border:1px solid rgba(198,255,0,.18);border-radius:28px;padding:60px 28px;overflow:hidden;
+  }
+  .final h2{margin-bottom:8px}
+  .final p{color:var(--muted);margin-bottom:28px}
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid rgba(255,255,255,.06);padding:30px 0;color:var(--muted);font-size:.88rem}
+  .foot-in{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  .foot-links a{margin-left:18px;transition:color .14s} .foot-links a:hover{color:var(--neon)}
+
+  /* ---------- responsive ---------- */
+  @media(max-width:860px){
+    .hero-in{grid-template-columns:1fr;gap:40px;text-align:center}
+    .sub{margin-left:auto;margin-right:auto}
+    .cta-row{justify-content:center}
+    .pill{margin-left:auto;margin-right:auto}
+    .feat{grid-template-columns:1fr}
+    .steps{grid-template-columns:1fr}
+    .nav-cta{display:none}
   }
 </style>
 </head>
 <body>
-  <div class="logo">🐔</div>
-  <h1>Chickn</h1>
-  <p class="tag">Bora transformar frango em galo. 💪</p>
 
-  <span class="badge">VERSÃO DE VALIDAÇÃO · ANDROID</span>
-  <br>
-  <a class="btn" href="https://github.com/marvinabr/chickn-site/releases/latest/download/chickn-validacao.apk">
-    ⬇️ Baixar APK
-  </a>
-  <p class="meta">Android 7+ · ~68&nbsp;MB · instale fora da Play Store</p>
-
-  <p class="warn">
-    Como é instalação fora da loja, o Android pode pedir pra
-    <strong>permitir apps de fontes desconhecidas</strong>. É só autorizar a
-    instalação do navegador/arquivos.
-  </p>
-
-  <div class="links">
-    <a href="privacy-policy.html">Política de privacidade</a>·
-    <a href="mailto:marvinabr@gmail.com">Contato</a>
+<nav>
+  <div class="wrap nav-in">
+    <a class="brand" href="#"><img src="icon.png" alt="Chickn"> Chick<span>n</span></a>
+    <a class="btn btn-primary btn-sm nav-cta" href="https://github.com/marvinabr/chickn-site/releases/latest/download/chickn-validacao.apk">Baixar APK</a>
   </div>
+</nav>
+
+<header class="hero">
+  <div class="glow"></div>
+  <div class="grid-bg"></div>
+  <div class="wrap hero-in">
+    <div>
+      <span class="pill">🐔 versão de validação · Android</span>
+      <h1>Bora virar <span class="hl">galo.</span></h1>
+      <p class="sub">Registre seus treinos em segundos e veja o frango virar fera. Simples de doer.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://github.com/marvinabr/chickn-site/releases/latest/download/chickn-validacao.apk">⬇️ Baixar APK</a>
+        <div class="cta-meta">Android 7+ · <b>~68&nbsp;MB</b> · grátis</div>
+      </div>
+    </div>
+
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="screen">
+          <div class="s-head">
+            <img src="icon.png" alt=""><span class="nm">Chickn</span><span class="gear">⚙</span>
+          </div>
+          <div>
+            <div class="s-greet">E aí, frango! 🔥</div>
+            <div class="s-tag">Bora pra cima do treino de hoje</div>
+          </div>
+          <div class="s-card"><div><div class="day">Hoje · 19:40</div><div class="st on">Em andamento</div></div><div class="kg">1.250 kg</div></div>
+          <div class="s-card"><div><div class="day">Ontem · Peito/Tríceps</div><div class="st done">Concluído</div></div><div class="kg">3.120 kg</div></div>
+          <div class="s-card"><div><div class="day">Seg · Pernas</div><div class="st done">Concluído</div></div><div class="kg">5.400 kg</div></div>
+          <div class="s-fab">⚡ TREINAR</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="block wrap">
+  <div class="eyebrow">Por que Chickn</div>
+  <h2>Tudo que importa, nada que atrapalha.</h2>
+  <p class="lead">O essencial pra registrar e evoluir — e umas sacadas que só o Chickn tem.</p>
+  <div class="feat">
+    <div class="card">
+      <div class="ico">⚡</div>
+      <h3>Registro em segundos</h3>
+      <p>Abriu, registrou a série, pronto. Peso sugerido a partir do seu último treino — sem perder tempo digitando.</p>
+    </div>
+    <div class="card">
+      <div class="ico">📷</div>
+      <h3>IA identifica o aparelho</h3>
+      <p>Não sabe o nome do equipamento? Tira uma foto: a IA reconhece e te ajuda a registrar e progredir.</p>
+    </div>
+    <div class="card">
+      <div class="ico">🔥</div>
+      <h3>Frases na sua medida</h3>
+      <p>Do Carinhoso ao Carrasco. Escolha o nível de pressão e a meta — o app te incentiva a cada série.</p>
+    </div>
+    <div class="card">
+      <div class="ico">💪</div>
+      <h3>A foto do "tá pago"</h3>
+      <p>No fim do treino, registra a vitória com pose e a marca Chickn. Salva, posta e mostra que tá pago.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block wrap">
+  <div class="eyebrow">Instalação</div>
+  <h2>Em 3 passos.</h2>
+  <p class="lead">Como ainda não está na Play Store, a instalação é direta pelo APK.</p>
+  <div class="steps">
+    <div class="step"><h4>Baixe o APK</h4><p>Toque em "Baixar APK" aqui em cima pelo celular Android.</p></div>
+    <div class="step"><h4>Permita a instalação</h4><p>O Android pode pedir pra autorizar "fontes desconhecidas". É só permitir.</p></div>
+    <div class="step"><h4>Abra e bora</h4><p>Instalou, abriu, treinou. Entre com o Google nas Configurações pra backup e foto-IA.</p></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="final">
+    <div class="eyebrow">Tá esperando o quê?</div>
+    <h2>Transforma frango em galo. 🐔</h2>
+    <p>Baixa agora e registra o treino de hoje.</p>
+    <a class="btn btn-primary" href="https://github.com/marvinabr/chickn-site/releases/latest/download/chickn-validacao.apk">⬇️ Baixar APK</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-in">
+    <div>© 2026 Chickn · feito com 🐔 e suor</div>
+    <div class="foot-links">
+      <a href="privacy-policy.html">Política de privacidade</a>
+      <a href="mailto:marvinabr@gmail.com">Contato</a>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
