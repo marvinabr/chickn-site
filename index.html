@@ -105,6 +105,7 @@
   }
   .notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:24px;background:#1c1c20;border-radius:0 0 16px 16px;z-index:3}
   .screen{position:absolute;inset:0;background:var(--bg);padding:30px 18px 18px;display:flex;flex-direction:column;gap:14px}
+  video.screen{padding:0;object-fit:cover;background:#000}
   .s-head{display:flex;align-items:center;gap:8px}
   .s-head img{width:26px;height:26px;border-radius:7px}
   .s-head .nm{font-family:var(--display);font-weight:700;color:var(--neon);font-size:1.05rem}
@@ -210,19 +211,7 @@
     <div class="phone-wrap">
       <div class="phone">
         <div class="notch"></div>
-        <div class="screen">
-          <div class="s-head">
-            <img src="icon.png" alt=""><span class="nm">Chickn</span><span class="gear">⚙</span>
-          </div>
-          <div>
-            <div class="s-greet">E aí, frango! 🔥</div>
-            <div class="s-tag">Bora pra cima do treino de hoje</div>
-          </div>
-          <div class="s-card"><div><div class="day">Hoje · 19:40</div><div class="st on">Em andamento</div></div><div class="kg">1.250 kg</div></div>
-          <div class="s-card"><div><div class="day">Ontem · Peito/Tríceps</div><div class="st done">Concluído</div></div><div class="kg">3.120 kg</div></div>
-          <div class="s-card"><div><div class="day">Seg · Pernas</div><div class="st done">Concluído</div></div><div class="kg">5.400 kg</div></div>
-          <div class="s-fab">⚡ TREINAR</div>
-        </div>
+        <video class="screen" src="demo.mp4" autoplay muted loop playsinline poster="icon.png"></video>
       </div>
     </div>
   </div>
