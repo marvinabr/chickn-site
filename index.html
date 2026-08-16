@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Chickn — bora virar galo 🐔</title>
-<meta name="description" content="Registre seus treinos de academia em segundos. IA que identifica o aparelho, plano do dia, cardio, motivação na sua medida e modo personal trainer. App Android.">
+<meta name="description" content="Registre seus treinos de academia em segundos. IA que identifica o aparelho, plano do dia, cardio, motivação na sua medida e modo personal trainer. Android e iOS, grátis.">
 <meta name="theme-color" content="#0E0E10">
 <!-- Open Graph -->
 <meta property="og:title" content="Chickn — bora virar galo">
-<meta property="og:description" content="Registre seus treinos em segundos. IA, plano do dia, cardio, motivação na sua medida e modo personal.">
+<meta property="og:description" content="Registre seus treinos em segundos. IA, plano do dia, cardio, motivação na sua medida e modo personal. Android e iOS.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://marvinabr.github.io/chickn-site/icon.png">
+<meta property="og:image" content="https://marvinamiranda.github.io/chickn-site/icon.png">
 <link rel="icon" href="icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,6 +40,9 @@
     border-bottom:1px solid rgba(255,255,255,.06);
   }
   .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .nav-actions{display:flex;align-items:center;gap:20px}
+  .nav-link{font-weight:600;font-size:.92rem;color:var(--muted);transition:color .14s}
+  .nav-link:hover{color:var(--neon)}
   .brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;font-size:1.2rem}
   .brand img{width:32px;height:32px;border-radius:8px}
   .brand span{color:var(--neon)}
@@ -159,6 +162,21 @@
   .step h4{font-family:var(--display);font-weight:700;font-size:1.02rem;margin-bottom:4px}
   .step p{color:var(--muted);font-size:.9rem}
 
+  /* ---------- personal banner ---------- */
+  .pt-banner{
+    display:flex;align-items:center;gap:18px;margin-top:28px;
+    background:linear-gradient(150deg,rgba(198,255,0,.1),rgba(255,45,120,.07));
+    border:1px solid rgba(198,255,0,.22);border-radius:20px;padding:22px 26px;
+    transition:transform .16s ease,border-color .16s ease;
+  }
+  .pt-banner:hover{transform:translateY(-3px);border-color:rgba(198,255,0,.45)}
+  .pt-ico{font-size:2rem;flex:0 0 auto}
+  .pt-txt{display:flex;flex-direction:column;gap:3px}
+  .pt-txt b{font-family:var(--display);font-weight:700;font-size:1.12rem}
+  .pt-txt span{color:var(--muted);font-size:.94rem}
+  .pt-go{margin-left:auto;font-family:var(--display);font-weight:700;color:var(--neon);white-space:nowrap}
+  @media(max-width:600px){.pt-banner{flex-wrap:wrap}.pt-go{margin-left:0}}
+
   /* ---------- final cta ---------- */
   .final{
     position:relative;text-align:center;margin:24px 0 80px;
@@ -211,7 +229,10 @@
 <nav>
   <div class="wrap nav-in">
     <a class="brand" href="#"><img src="icon.png" alt="Chickn"> Chick<span>n</span></a>
-    <a class="btn btn-primary btn-sm nav-cta" href="https://play.google.com/store/apps/details?id=app.chickn" target="_blank" rel="noopener">Baixar</a>
+    <div class="nav-actions">
+      <a class="nav-link nav-cta" href="personal.html">Para personais 🧑‍🏫</a>
+      <a class="btn btn-primary btn-sm nav-cta" href="#baixar">Baixar</a>
+    </div>
   </div>
 </nav>
 
@@ -220,28 +241,27 @@
   <div class="grid-bg"></div>
   <div class="wrap hero-in">
     <div>
-      <span class="pill">🐔 já disponível na Google Play</span>
+      <span class="pill">🐔 já disponível na App Store e no Google Play</span>
       <h1>Bora virar <span class="hl">galo.</span></h1>
       <p class="sub">Registre seus treinos em segundos e veja o frango virar fera. Simples de doer.</p>
       <div class="cta-row">
-        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=app.chickn" target="_blank" rel="noopener">▶ Baixar no Google Play</a>
-        <div class="cta-meta">Android · <b>grátis</b> · iOS em breve</div>
+        <a class="btn btn-primary" href="#baixar">▶ Baixar grátis</a>
+        <div class="cta-meta">iPhone e Android · <b>grátis</b></div>
       </div>
 
-      <div class="stores">
+      <div class="stores" id="baixar">
         <span class="lbl">Baixe agora</span>
         <div class="badges">
-          <div class="badge" title="Em breve na App Store">
-            <span class="soon">EM BREVE</span>
+          <a class="badge" href="https://apps.apple.com/br/app/id6788411736" target="_blank" rel="noopener" title="Baixar na App Store">
             <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M17.05 12.04c-.03-2.6 2.12-3.85 2.22-3.91-1.21-1.77-3.1-2.01-3.77-2.04-1.6-.16-3.13.94-3.94.94-.81 0-2.07-.92-3.4-.89-1.75.03-3.36 1.02-4.26 2.58-1.82 3.16-.46 7.83 1.3 10.39.86 1.25 1.89 2.66 3.24 2.61 1.3-.05 1.79-.84 3.36-.84 1.57 0 2.01.84 3.39.81 1.4-.02 2.29-1.28 3.15-2.54.99-1.45 1.4-2.86 1.42-2.93-.03-.01-2.73-1.05-2.76-4.15zM14.6 4.59c.72-.87 1.2-2.08 1.07-3.29-1.03.04-2.28.69-3.02 1.56-.66.77-1.24 2-1.08 3.18 1.15.09 2.32-.58 3.03-1.45z"/></svg>
             <span class="txt"><small>Baixe na</small><b>App Store</b></span>
-          </div>
+          </a>
           <a class="badge" href="https://play.google.com/store/apps/details?id=app.chickn" target="_blank" rel="noopener" title="Baixar no Google Play">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M3.6 1.81 13.79 12 3.6 22.19a1.2 1.2 0 0 1-.6-1.05V2.86c0-.45.24-.83.6-1.05z" fill="#00D2FF"/>
               <path d="m13.79 12 3.26-3.26 3.74 2.14c.83.48.83 1.76 0 2.24l-3.74 2.14L13.79 12z" fill="#FFCE00"/>
               <path d="M17.05 8.74 13.79 12 3.6 1.81c.3-.18.67-.2 1.01-.02l.12.07 12.32 6.88z" fill="#00F076"/>
-              <path d="M17.05 15.26 4.85 22.13l-.12.07c-.34.18-.71.16-1.01-.02L13.79 12l3.26 3.26z" fill="#FF3A44"/>
+              <path d="M17.05 15.26 4.85 22.13l-.12.07c-.34.16-.71.16-1.01-.02L13.79 12l3.26 3.26z" fill="#FF3A44"/>
             </svg>
             <span class="txt"><small>Disponível no</small><b>Google Play</b></span>
           </a>
@@ -307,22 +327,31 @@
 </section>
 
 <section class="block wrap">
-  <div class="eyebrow">Teste fechado</div>
+  <div class="eyebrow">Como começar</div>
   <h2>Em 3 passos.</h2>
-  <p class="lead">O Chickn está em teste fechado e chega logo na Play Store. Quer entrar antes? É rapidinho.</p>
+  <p class="lead">Nada de cadastro chato. Baixa, abre e já registra o treino de hoje. Login só se você quiser backup e foto-IA.</p>
   <div class="steps">
-    <div class="step"><h4>Peça acesso</h4><p>Toque em "Quero ser testador" e me mande o Gmail que você usa no Android.</p></div>
-    <div class="step"><h4>Aceite o convite</h4><p>Você recebe um link da Play Store pra entrar no teste. Toque em "Tornar-se testador".</p></div>
-    <div class="step"><h4>Instale e bora</h4><p>Instala pela Play, abre e treina. Entre com o Google pra backup e foto-IA.</p></div>
+    <div class="step"><h4>Baixe grátis</h4><p>Pegue na <b>App Store</b> (iPhone) ou no <b>Google Play</b> (Android). É de graça.</p></div>
+    <div class="step"><h4>Abra e treine</h4><p>Monte o treino do dia ou siga seu programa e registre a série. O peso já vem sugerido.</p></div>
+    <div class="step"><h4>Evolua</h4><p>Veja o frango virar galo, bata recordes e feche com a foto do "tá pago". Login com Google é opcional.</p></div>
   </div>
+
+  <a class="pt-banner" href="personal.html">
+    <div class="pt-ico">🧑‍🏫</div>
+    <div class="pt-txt">
+      <b>É personal trainer?</b>
+      <span>Monte programas, organize alunos em grupos e acompanhe cada execução. Veja o guia rápido pra começar.</span>
+    </div>
+    <div class="pt-go">Abrir guia →</div>
+  </a>
 </section>
 
 <section class="wrap">
   <div class="final">
     <div class="eyebrow">Tá esperando o quê?</div>
     <h2>Transforma frango em galo. 🐔</h2>
-    <p>Baixa de graça e começa o treino de hoje.</p>
-    <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=app.chickn" target="_blank" rel="noopener">▶ Baixar no Google Play</a>
+    <p>Baixa de graça — iPhone ou Android — e começa o treino de hoje.</p>
+    <a class="btn btn-primary" href="#baixar">▶ Baixar grátis</a>
   </div>
 </section>
 
